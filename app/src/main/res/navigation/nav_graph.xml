@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/authenticationFragment">
+
+    <fragment
+        android:id="@+id/authenticationFragment"
+        android:name="com.example.noted.authentication.AuthenticationFragment"
+        android:label="authentication_fragment"
+        tools:layout="@layout/authentication_fragment" >
+        <action
+            android:id="@+id/action_authenticationFragment_to_notesList"
+            app:destination="@id/notesList"
+            app:popUpTo="@id/authenticationFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/notesList"
+        android:name="com.example.noted.noteslist.NotesList"
+        android:label="notes_list_fragment"
+        tools:layout="@layout/notes_list_fragment" >
+        <action
+            android:id="@+id/action_notesList_to_noteDetails"
+            app:destination="@id/noteDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteDetails"
+        android:name="com.example.noted.notedetails.NoteDetails"
+        android:label="note_details_fragment"
+        tools:layout="@layout/note_details_fragment" />
+</navigation>
