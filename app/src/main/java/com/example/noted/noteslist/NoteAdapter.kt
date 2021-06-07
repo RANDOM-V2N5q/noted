@@ -1,5 +1,6 @@
 package com.example.noted.noteslist
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,8 @@ class NoteAdapter(private val list: LiveData<List<Note>>) :
 
     inner class NoteHolder(view: View) : RecyclerView.ViewHolder(view)
 
+    private val colors = listOf("#F1CD96", "#F19696", "#B8DBFB", "#ABE1A6")
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.one_note, parent, false)
         return NoteHolder(view)
@@ -24,6 +27,8 @@ class NoteAdapter(private val list: LiveData<List<Note>>) :
     override fun getItemCount() = list.value?.size ?: 0
 
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
+        holder.itemView.setBackgroundColor(Color.parseColor(colors[position % colors.size]))
+
         val root = holder.itemView.findViewById<MaterialCardView>(R.id.root)
         val title = holder.itemView.findViewById<MaterialTextView>(R.id.title_textView)
         val content = holder.itemView.findViewById<MaterialTextView>(R.id.content_textView)
