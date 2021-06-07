@@ -6,27 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.example.noted.R
+import com.example.noted.databinding.NoteDetailsFragmentBinding
 
 class NoteDetails : Fragment() {
 
-    companion object {
-        fun newInstance() = NoteDetails()
-    }
-
     private lateinit var viewModel: NoteDetailsViewModel
+    private lateinit var binding: NoteDetailsFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.note_details_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    ): View {
         viewModel = ViewModelProvider(this).get(NoteDetailsViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        binding = DataBindingUtil.inflate(inflater,R.layout.note_details_fragment,container,false)
+        binding.lifecycleOwner = this
+        binding.viewmodel = viewModel
+
+        return binding.root
     }
 
 }
