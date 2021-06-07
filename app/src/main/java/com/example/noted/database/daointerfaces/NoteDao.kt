@@ -1,5 +1,6 @@
 package com.example.noted.database.daointerfaces
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.noted.database.entities.Note
 
@@ -16,7 +17,7 @@ interface NoteDao {
     suspend fun deleteNote(note: Note)
 
     @Query("SELECT * FROM note")
-    suspend fun allNotes(): List<Note>
+    fun allNotes(): LiveData<List<Note>>
 
     @Query("SELECT * FROM note WHERE id = :id")
     suspend fun oneNote(id: Int): Note

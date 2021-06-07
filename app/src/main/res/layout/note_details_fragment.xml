@@ -53,6 +53,7 @@
                     android:layout_marginBottom="8dp"
                     android:background="@null"
                     android:fontFamily="@font/montserrat_bold"
+                    android:hint="Add title"
                     android:inputType="text"
                     android:text="@={viewmodel.title}" />
 
@@ -74,6 +75,7 @@
                             android:layout_marginBottom="8dp"
                             android:background="@null"
                             android:gravity="start|top"
+                            android:hint="Write something..."
                             android:inputType="textMultiLine"
                             android:paddingBottom="100dp"
                             android:text="@={viewmodel.text}" />

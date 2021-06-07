@@ -4,6 +4,6 @@ import androidx.lifecycle.ViewModel
 
 class MainActivityViewModel: ViewModel() {
 
-    val selectedNoteId = -1
+    var selectedNoteId = -1
 
 }

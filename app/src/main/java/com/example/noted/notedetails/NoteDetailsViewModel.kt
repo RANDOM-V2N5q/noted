@@ -14,16 +14,16 @@ class NoteDetailsViewModel(application: Application) : AndroidViewModel(applicat
 
     private val noteRepository = NoteRepository(AppDatabase.getDatabase(application).noteDao())
 
-    var noteId = 0
-    val title = MutableLiveData("Add title")
-    val text = MutableLiveData("Write something...")
+    var noteId = -1
+    val title = MutableLiveData("")
+    val text = MutableLiveData("")
 
     fun  getNote(id: Int) {
         viewModelScope.launch {
             val note = noteRepository.oneNote(id)
             noteId = note.id
             title.value = note.title
-            text.value = note.text
+            text.value = note.content
         }
     }
 
@@ -39,5 +39,11 @@ class NoteDetailsViewModel(application: Application) : AndroidViewModel(applicat
             val note = Note(noteId, title.value!!, text.value!!)
             noteRepository.updateNote(note)
         }
+    }
+
+    fun reset() {
+        noteId = -1
+        title.value = ""
+        text.value = ""
     }
 }

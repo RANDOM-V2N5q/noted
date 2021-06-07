@@ -1,5 +1,6 @@
 package com.example.noted.database.repositories
 
+import androidx.lifecycle.LiveData
 import com.example.noted.database.daointerfaces.NoteDao
 import com.example.noted.database.entities.Note
 
@@ -17,7 +18,7 @@ class NoteRepository(private val noteDao: NoteDao) {
         noteDao.deleteNote(note)
     }
 
-    suspend fun allNotes(): List<Note> {
+    fun allNotes(): LiveData<List<Note>> {
         return noteDao.allNotes()
     }
 

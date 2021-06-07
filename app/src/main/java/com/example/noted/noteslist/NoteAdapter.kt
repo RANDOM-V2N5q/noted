@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.noted.MainActivityViewModel
 import com.example.noted.R
-import com.example.noted.entity.Note
+import com.example.noted.database.entities.Note
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 
-class NoteAdapter(private val list: LiveData<List<Note>>) :
+class NoteAdapter(private val list: LiveData<List<Note>>, private val viewModel: MainActivityViewModel) :
     RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
 
     inner class NoteHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -39,6 +40,7 @@ class NoteAdapter(private val list: LiveData<List<Note>>) :
         content.text = item.content
 
         root.setOnClickListener {
+            viewModel.selectedNoteId = item.id
             it.findNavController().navigate(R.id.action_notesList_to_noteDetails)
         }
     }

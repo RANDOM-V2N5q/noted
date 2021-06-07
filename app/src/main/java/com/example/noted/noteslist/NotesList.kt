@@ -9,15 +9,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.noted.MainActivityViewModel
 import com.example.noted.R
-import com.example.noted.entity.Note
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.notes_list_fragment.*
 
 
 class NotesList : Fragment() {
 
     private lateinit var viewModel: NotesListViewModel
+    private lateinit var mainViewModel: MainActivityViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var noteAdapter: NoteAdapter
 
@@ -25,30 +25,14 @@ class NotesList : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = ViewModelProvider(requireActivity()).get(NotesListViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
 
-        // TODO
-        val temp = listOf(
-            Note(1, "Ideas", "Create app with my recipes Create app with my recipes"),
-            Note(2, "Remember about milk!", "Buy milk to coffee"),
-            Note(3, "Passwords", "Login: admin\nPassword: admin Create app with my recipes"),
-            Note(1, "Ideas", "Create app with my recipes"),
-            Note(2, "Remember about milk!", "Buy milk to coffee Create app with my recipes Create app with my recipes"),
-            Note(3, "Passwords", "Login: admin\nPassword: admin"),
-            Note(1, "Ideas", "Create app with my recipes"),
-            Note(2, "Remember about milk! Remember about milk!", "Buy milk to coffee"),
-            Note(3, "Passwords", "Login: admin\nPassword: admin"),
-            Note(1, "Ideas", "Create app with my recipes"),
-            Note(2, "Remember about milk!", "Buy milk to coffee"),
-            Note(3, "Passwords", "Login: admin\nPassword: admin Create app with my recipes")
-        )
-
-        viewModel = ViewModelProvider(this).get(NotesListViewModel::class.java)
-
-        viewModel.getNotes(temp).observe(viewLifecycleOwner, Observer {
+        viewModel.notes.observe(viewLifecycleOwner, Observer {
             noteAdapter.notifyDataSetChanged()
         })
 
-        noteAdapter = NoteAdapter(viewModel.notes)
+        noteAdapter = NoteAdapter(viewModel.notes, mainViewModel)
 
         return inflater.inflate(R.layout.notes_list_fragment, container, false)
     }
@@ -59,6 +43,7 @@ class NotesList : Fragment() {
         recyclerView = notes_recyclerView.apply { adapter = noteAdapter }
 
         fab.setOnClickListener {
+            mainViewModel.selectedNoteId = -1
             findNavController().navigate(R.id.action_notesList_to_noteDetails)
         }
     }

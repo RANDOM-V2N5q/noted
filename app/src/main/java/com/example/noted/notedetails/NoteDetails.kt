@@ -47,6 +47,7 @@ class NoteDetails : Fragment() {
                 viewModel.updateNote()
             }
 
+            viewModel.reset()
             findNavController().popBackStack()
         }
     }
