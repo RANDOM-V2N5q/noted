@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Noted</string>
+
+    <string name="auth_failed">Authentication failed!</string>
+    <string name="auth_error">Authentication error: </string>
+    <string name="auth_successful">Authentication is successful!</string>
+
+    <string name="title">Fingerprint authentication</string>
+    <string name="subtitle">Login using fingerprint authentication</string>
+    <string name="negative_button">Use PIN code instead</string>
 </resources>
