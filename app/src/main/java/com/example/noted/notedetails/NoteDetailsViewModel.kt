@@ -1,6 +1,7 @@
 package com.example.noted.notedetails
 
 import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +10,7 @@ import com.example.noted.database.entities.Note
 import com.example.noted.database.repositories.NoteRepository
 import kotlinx.coroutines.launch
 
-class NoteDetailsViewModel(application: Application) : ViewModel() {
+class NoteDetailsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val noteRepository = NoteRepository(AppDatabase.getDatabase(application).noteDao())
 

@@ -22,10 +22,12 @@ class NoteDetails : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this).get(NoteDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(NoteDetailsViewModel::class.java)
         mainViewModel = ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
 
-        viewModel.getNote(mainViewModel.selectedNoteId)
+        if(mainViewModel.selectedNoteId != -1) {
+            viewModel.getNote(mainViewModel.selectedNoteId)
+        }
 
         binding = DataBindingUtil.inflate(inflater,R.layout.note_details_fragment,container,false)
         binding.lifecycleOwner = this
@@ -38,7 +40,7 @@ class NoteDetails : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.fab.setOnClickListener {
-            if(viewModel.noteId == 0) {
+            if(viewModel.noteId == -1) {
                 viewModel.createNote()
             }
             else {
