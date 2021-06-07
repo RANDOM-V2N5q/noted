@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.noted.R
 import com.example.noted.entity.Note
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.notes_list_fragment.*
 
 
@@ -55,5 +57,9 @@ class NotesList : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = notes_recyclerView.apply { adapter = noteAdapter }
+
+        fab.setOnClickListener {
+            findNavController().navigate(R.id.action_notesList_to_noteDetails)
+        }
     }
 }
