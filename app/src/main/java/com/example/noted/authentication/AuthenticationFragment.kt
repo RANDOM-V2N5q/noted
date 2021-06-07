@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.noted.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.authentication_fragment.*
@@ -55,6 +56,7 @@ class AuthenticationFragment : Fragment() {
                 super.onAuthenticationSucceeded(result)
                 val message = getString(R.string.auth_successful)
                 Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+                goToNoteList()
             }
         })
 
@@ -69,4 +71,7 @@ class AuthenticationFragment : Fragment() {
         }
     }
 
+    private fun goToNoteList() {
+        findNavController().navigate(R.id.action_authenticationFragment_to_notesList)
+    }
 }
