@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".noteslist.NotesList"
-    android:background="@drawable/ic_launcher_background">
+    tools:context=".noteslist.NotesList">
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notes_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

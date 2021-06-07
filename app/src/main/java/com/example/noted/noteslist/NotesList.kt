@@ -10,10 +10,6 @@ import com.example.noted.R
 
 class NotesList : Fragment() {
 
-    companion object {
-        fun newInstance() = NotesList()
-    }
-
     private lateinit var viewModel: NotesListViewModel
 
     override fun onCreateView(
@@ -26,7 +22,6 @@ class NotesList : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(NotesListViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
