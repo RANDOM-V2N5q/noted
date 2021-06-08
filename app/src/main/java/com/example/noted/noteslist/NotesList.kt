@@ -31,7 +31,7 @@ class NotesList : Fragment() {
             noteAdapter.notifyDataSetChanged()
         })
 
-        noteAdapter = NoteAdapter(viewModel.notes, mainViewModel)
+        noteAdapter = NoteAdapter(viewModel.notes, mainViewModel, requireContext())
 
         return inflater.inflate(R.layout.notes_list_fragment, container, false)
     }
