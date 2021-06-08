@@ -13,7 +13,6 @@ import com.example.noted.MainActivityViewModel
 import com.example.noted.R
 import kotlinx.android.synthetic.main.notes_list_fragment.*
 
-
 class NotesList : Fragment() {
 
     private lateinit var viewModel: NotesListViewModel

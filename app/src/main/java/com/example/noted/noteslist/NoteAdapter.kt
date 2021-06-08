@@ -13,7 +13,10 @@ import com.example.noted.database.entities.Note
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textview.MaterialTextView
 
-class NoteAdapter(private val list: LiveData<List<Note>>, private val viewModel: MainActivityViewModel) :
+class NoteAdapter(
+    private val list: LiveData<List<Note>>,
+    private val viewModel: MainActivityViewModel
+) :
     RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
 
     inner class NoteHolder(view: View) : RecyclerView.ViewHolder(view)

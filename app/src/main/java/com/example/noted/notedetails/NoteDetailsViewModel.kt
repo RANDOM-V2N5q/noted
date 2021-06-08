@@ -3,7 +3,6 @@ package com.example.noted.notedetails
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.noted.database.AppDatabase
 import com.example.noted.database.entities.Note
@@ -18,7 +17,7 @@ class NoteDetailsViewModel(application: Application) : AndroidViewModel(applicat
     val title = MutableLiveData("")
     val text = MutableLiveData("")
 
-    fun  getNote(id: Int) {
+    fun getNote(id: Int) {
         viewModelScope.launch {
             val note = noteRepository.oneNote(id)
             noteId = note.id
