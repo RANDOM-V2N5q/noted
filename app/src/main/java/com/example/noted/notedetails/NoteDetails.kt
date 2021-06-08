@@ -38,7 +38,7 @@ class NoteDetails : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.reset()
         binding.fab.setOnClickListener {
             if(viewModel.noteId == -1) {
                 viewModel.createNote()
@@ -47,7 +47,7 @@ class NoteDetails : Fragment() {
                 viewModel.updateNote()
             }
 
-            viewModel.reset()
+
             findNavController().popBackStack()
         }
     }
