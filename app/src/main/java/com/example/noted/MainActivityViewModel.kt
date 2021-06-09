@@ -2,8 +2,8 @@ package com.example.noted
 
 import androidx.lifecycle.ViewModel
 
-class MainActivityViewModel: ViewModel() {
+class MainActivityViewModel : ViewModel() {
 
-    val selectedNoteId = -1
+    var selectedNoteId = -1
 
 }

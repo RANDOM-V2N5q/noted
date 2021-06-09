@@ -1,15 +1,22 @@
 package com.example.noted.noteslist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.noted.entity.Note
+import android.app.Application
+import androidx.lifecycle.*
+import com.example.noted.database.AppDatabase
+import com.example.noted.database.repositories.NoteRepository
+import com.example.noted.database.entities.Note
+import kotlinx.coroutines.launch
 
-class NotesListViewModel : ViewModel() {
+class NotesListViewModel(application: Application) : AndroidViewModel(application) {
 
-    var notes: MutableLiveData<List<Note>> = MutableLiveData()
-    fun getNotes(list: List<Note>): LiveData<List<Note>> {
-        notes.value = list
-        return notes
+    private val noteRepository = NoteRepository(AppDatabase.getDatabase(application).noteDao())
+
+    lateinit var notes: LiveData<List<Note>>
+
+    init {
+        viewModelScope.launch {
+            notes = noteRepository.allNotes()
+        }
     }
+
 }

@@ -39,26 +39,29 @@ class AuthenticationFragment : Fragment() {
 
         executor = ContextCompat.getMainExecutor(requireContext())
 
-        biometricPrompt = BiometricPrompt(this@AuthenticationFragment, executor, object : BiometricPrompt.AuthenticationCallback() {
-            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-                super.onAuthenticationError(errorCode, errString)
-                val message = getString(R.string.auth_error) + " " + errString
-                Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
-            }
+        biometricPrompt = BiometricPrompt(
+            this@AuthenticationFragment,
+            executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                    super.onAuthenticationError(errorCode, errString)
+                    val message = getString(R.string.auth_error) + " " + errString
+                    Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+                }
 
-            override fun onAuthenticationFailed() {
-                super.onAuthenticationFailed()
-                val message = getString(R.string.auth_failed)
-                Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
-            }
+                override fun onAuthenticationFailed() {
+                    super.onAuthenticationFailed()
+                    val message = getString(R.string.auth_failed)
+                    Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+                }
 
-            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                super.onAuthenticationSucceeded(result)
-                val message = getString(R.string.auth_successful)
-                Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
-                goToNoteList()
-            }
-        })
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    val message = getString(R.string.auth_successful)
+                    Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+                    goToNoteList()
+                }
+            })
 
         promptInfo = BiometricPrompt.PromptInfo.Builder()
             .setTitle(getString(R.string.title))
