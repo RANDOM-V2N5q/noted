@@ -9,4 +9,5 @@
     <string name="title">Fingerprint authentication</string>
     <string name="subtitle">Login using fingerprint authentication</string>
     <string name="negative_button">Use PIN code instead</string>
+    <string name="use_fingerprint">Use your fingerprint scanner to login</string>
 </resources>
