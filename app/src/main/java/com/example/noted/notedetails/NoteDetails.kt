@@ -25,21 +25,24 @@ class NoteDetails : Fragment() {
         viewModel = ViewModelProvider(requireActivity()).get(NoteDetailsViewModel::class.java)
         mainViewModel = ViewModelProvider(requireActivity()).get(MainActivityViewModel::class.java)
 
-        if (mainViewModel.selectedNoteId != -1) {
-            viewModel.getNote(mainViewModel.selectedNoteId)
-        }
-
         binding =
             DataBindingUtil.inflate(inflater, R.layout.note_details_fragment, container, false)
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
+
+        if (mainViewModel.selectedNoteId != -1) {
+            viewModel.getNote(mainViewModel.selectedNoteId)
+        }
+        else {
+            viewModel.reset()
+            binding.deleteButton.visibility = View.GONE
+        }
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.reset()
         binding.fab.setOnClickListener {
             if (viewModel.noteId == -1) {
                 viewModel.createNote()
@@ -47,6 +50,10 @@ class NoteDetails : Fragment() {
                 viewModel.updateNote()
             }
 
+            findNavController().popBackStack()
+        }
+        binding.deleteButton.setOnClickListener {
+            viewModel.deleteNote()
             findNavController().popBackStack()
         }
     }

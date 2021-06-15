@@ -33,6 +33,13 @@ class NoteDetailsViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
+    fun deleteNote() {
+        viewModelScope.launch {
+            val note = Note(noteId, title.value!!, text.value!!)
+            noteRepository.deleteNote(note)
+        }
+    }
+
     fun updateNote() {
         viewModelScope.launch {
             val note = Note(noteId, title.value!!, text.value!!)
